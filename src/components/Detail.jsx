@@ -21,7 +21,7 @@ export default function Detail() {
     );
   }
 
-  // 🎧 Text-to-Speech
+  // 🎧 Text-to-Speech (improved for mobile + male voice)
   const handleSpeak = () => {
     const synth = window.speechSynthesis;
 
@@ -31,21 +31,36 @@ export default function Detail() {
       return;
     }
 
-    const textContent = `
-      ${paper.Title || ""}
-      ${paper.Authors ? "Authors: " + paper.Authors : ""}
-      ${paper.Journal ? "Journal: " + paper.Journal : ""}
-      ${paper.Abstract ? "Abstract: " + paper.Abstract : ""}
-      ${paper.Sections ? "Sections: " + paper.Sections : ""}
-      ${paper.Figures ? "Figures: " + paper.Figures : ""}
-      ${paper.Tables ? "Tables: " + paper.Tables : ""}
-      ${paper.summary ? "Summary: " + paper.summary : ""}
-    `;
+    const textContent = [
+      paper.Title || "",
+      paper.Authors ? `Authors: ${paper.Authors}` : "",
+      paper.Journal ? `Journal: ${paper.Journal}` : "",
+      paper.Abstract ? `Abstract: ${paper.Abstract}` : "",
+      paper.Sections ? `Sections: ${paper.Sections}` : "",
+      paper.Figures ? `Figures: ${paper.Figures}` : "",
+      paper.Tables ? `Tables: ${paper.Tables}` : "",
+      paper.summary ? `Summary: ${paper.summary}` : "",
+    ].join(". ");
+
+    if (!textContent.trim()) {
+      alert("No readable text found.");
+      return;
+    }
 
     const utterance = new SpeechSynthesisUtterance(textContent);
     utterance.lang = "en-US";
     utterance.rate = 1;
     utterance.pitch = 1;
+
+    // Try to pick a male English voice
+    const voices = synth.getVoices();
+    const maleVoice =
+      voices.find(v =>
+        v.name.toLowerCase().includes("male") ||
+        v.name.toLowerCase().includes("daniel") ||
+        v.name.toLowerCase().includes("google uk english male")
+      ) || voices.find(v => v.lang.startsWith("en"));
+    if (maleVoice) utterance.voice = maleVoice;
 
     synth.cancel();
     synth.speak(utterance);
@@ -58,12 +73,16 @@ export default function Detail() {
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <AnimatedBackground />
 
-      {/* --- Main content --- */}
       <div className="relative z-10 pt-28 pb-12 px-4 sm:px-6 md:px-10 flex flex-col items-center">
         <div className="w-full max-w-5xl bg-black border border-gray-800 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+          
+          {/* --- Title --- */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-400 mb-4 text-center leading-snug">
+            {paper.Title}
+          </h1>
 
-          {/* 🎧 Read Aloud Button */}
-          <div className="flex justify-end mb-4">
+          {/* 🎧 Read Aloud Button (under title, small size) */}
+          <div className="flex justify-center mb-8">
             <button
               onClick={handleSpeak}
               className={`text-xs sm:text-sm px-3 py-1.5 rounded-md font-semibold transition duration-300 ${
@@ -75,11 +94,6 @@ export default function Detail() {
               {isSpeaking ? "🛑 Stop" : "🔊 Read Aloud"}
             </button>
           </div>
-
-          {/* --- Paper Title --- */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-400 mb-6 text-center leading-snug">
-            {paper.Title}
-          </h1>
 
           {/* --- Info section --- */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-6 mb-8 text-sm sm:text-base text-center">
@@ -180,6 +194,7 @@ function AnimatedBackground() {
     </div>
   );
 }
+
 
 
 

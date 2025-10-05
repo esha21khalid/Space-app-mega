@@ -23,7 +23,7 @@ export default function Summary() {
     );
   }
 
-  // 🎧 Text-to-speech function
+  // 🎧 Text-to-Speech (improved for male voice + mobile)
   const handleSpeak = () => {
     const synth = window.speechSynthesis;
 
@@ -33,10 +33,22 @@ export default function Summary() {
       return;
     }
 
-    const utterance = new SpeechSynthesisUtterance(summary.Summary);
+    const textContent = summary.Summary || "No summary available.";
+
+    const utterance = new SpeechSynthesisUtterance(textContent);
     utterance.lang = "en-US";
     utterance.rate = 1;
     utterance.pitch = 1;
+
+    // 🧠 Try to use a male English voice
+    const voices = synth.getVoices();
+    const maleVoice =
+      voices.find(v =>
+        v.name.toLowerCase().includes("male") ||
+        v.name.toLowerCase().includes("daniel") ||
+        v.name.toLowerCase().includes("google uk english male")
+      ) || voices.find(v => v.lang.startsWith("en"));
+    if (maleVoice) utterance.voice = maleVoice;
 
     synth.cancel();
     synth.speak(utterance);
@@ -47,15 +59,15 @@ export default function Summary() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-gray-900 to-gray-950 text-white flex justify-center items-center px-4 py-16 overflow-hidden">
-      {/* Dotted animation background */}
+      {/* ✨ Dotted animation background */}
       <div className="absolute inset-0 bg-[radial-gradient(white_1px,transparent_1px)] [background-size:22px_22px] opacity-10 animate-pulse"></div>
 
-      {/* Gradient overlay */}
+      {/* ✨ Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/70 to-black opacity-80"></div>
 
-      {/* Summary Card */}
+      {/* 📘 Summary Card */}
       <div className="relative z-10 max-w-3xl w-full bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-gray-700 shadow-2xl shadow-blue-900/30">
-
+        
         {/* 🎧 Read Aloud button */}
         <div className="flex justify-end mb-3">
           <button
@@ -78,7 +90,7 @@ export default function Summary() {
           {summary.Summary}
         </p>
 
-        {/* Button Section */}
+        {/* 🔗 Back Button */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
           <Link
             to="/papers"
@@ -91,6 +103,7 @@ export default function Summary() {
     </div>
   );
 }
+
 
 
 
