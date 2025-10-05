@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Papers from "./pages/Papers";
 import Detail from "./components/Detail";
 import Summary from "./components/Summary";
+import Mission from './pages/Mission'
+import Experiments from "./pages/Experiments";
 
 
 function App() {
@@ -17,7 +19,9 @@ function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/experiments" element={<Experiments />} />
           <Route path="/papers" element={<Papers />} />
+          <Route path='/missions' element={<Mission/>}/>
           <Route path="/paper/:id" element={<Detail />} />
           <Route path="/summary/:id" element={<Summary />} />
         </Routes>

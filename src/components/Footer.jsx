@@ -18,10 +18,10 @@ export default function Footer() {
         {/* 🚀 Brand Section */}
         <div>
           <h2 className="text-2xl font-bold text-blue-400 mb-3 tracking-wide">
-            🚀 LifeSpaceX
+            🚀  NASA SciLens
           </h2>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Exploring life beyond Earth — connecting data, discovery, and imagination
+            Exploring life beyond Earth  connecting data, discovery, and imagination
             to uncover how life adapts to the stars.
           </p>
         </div>
@@ -44,12 +44,14 @@ export default function Footer() {
               <Link to="/missions" className="hover:text-blue-300 transition duration-300">
                 Missions
               </Link>
+             
             </li>
             <li>
-              <Link to="/about" className="hover:text-blue-300 transition duration-300">
-                About
+              <Link to="/experiments" className="hover:text-blue-300 transition duration-300">
+                Biological Experiments
               </Link>
             </li>
+           
           </ul>
         </div>
 

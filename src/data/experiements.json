@@ -1,0 +1,92 @@
+[
+  {
+    "Title":" Element content of seedlings from seed and liverwort plant tissue in Apollo 15 and Apollo 16 post-flight biomedical evaluations (MMP 21243, MMP 21242)",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Parameter Value: Supplemental Data Files",
+    "Release_Date": "18-Sep-2025",
+    "Description": "Element content of seedlings from from seed and liverwort tissue in Apollo 15 and Apollo 16 post-flight biomedical evaluations (MMP 21243, MMP 21242). These findings are related to the feasibility of using plants for food in an international lunar base.",
+    "OSD_ID": "OSD-877",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-877"
+  },
+  {
+    "Title": " PH-04 Chile Peppers in Space",
+    "Organism": "Unknown",
+    "Factors": "NASA | No Fear Act | FOIA | USA.gov | Contact | Accessibility",
+    "Assay_Types": "Unknown",
+    "Release_Date": "NASA | No Fear Act | FOIA | USA.gov | Contact | Accessibility",
+    "Description": "NASA | No Fear Act | FOIA | USA.gov | Contact | Accessibility",
+    "OSD_ID": "OSD-772",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-772"
+  },
+  {
+    "Title":" Analysis of Vegetable Seedlings Grown in Contact with Apollo 14 Lunar Surface Fines",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Raw Data File",
+    "Release_Date": "End Date",
+    "Description": "Description",
+    "OSD_ID": "OSD-883",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-883"
+  },
+  {
+    "Title":" Effect of varying amounts of simulated lunar soil batch upon growth of lettuce explants",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Assay Name: Germination and Growth Assesment - Plant Material Biomass",
+    "Release_Date": "30-Jul-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-856",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-856"
+  },
+  {
+    "Title":" Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Plasma data",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Raw Spectral Data File",
+    "Release_Date": "17-Jul-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-832",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-832"
+  },
+  {
+    "Title":"Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Cortex data",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Raw Spectral Data File",
+    "Release_Date": "17-Jul-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-834",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-834"
+  },
+  {
+    "Title":"Effects of 5-Ion Beam Irradiation and Hindlimb Unloading on Metabolic Pathways in Plasma and Brain of Behaviorally Tested WAG/Rij Rats - Hippocampus data",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Raw Spectral Data File",
+    "Release_Date": "17-Jul-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-833",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-833"
+  },
+  {
+    "Title":"Life long effects of radiation and high fat diet on the mouse right ventricular tissue",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Raw Data File",
+    "Release_Date": "25-Jun-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-881",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-881"
+  },
+  {
+    "Title":"Apollo 17 Challenge System - Seed Germination (Cabbage, Brussel Sprouts, Radish and Lettuce)",
+    "Organism": "Term Source REF",
+    "Factors": "Ontology: Concept",
+    "Assay_Types": "Assay Name: Germination and Growth Assesment - Plant Material Biomass",
+    "Release_Date": "03-Jul-2025",
+    "Description": "Description",
+    "OSD_ID": "OSD-855",
+    "URL": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-855"
+  }
+]

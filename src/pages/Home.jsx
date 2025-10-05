@@ -63,7 +63,7 @@ export default function Home() {
 
         <p className="text-gray-300 text-sm md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
           Discover how life thrives beyond Earth. Explore NASA’s space biology
-          research — plants, microbes, and animals adapting to the final frontier.
+          research  plants, microbes, and animals adapting to the final frontier.
         </p>
 
         <button

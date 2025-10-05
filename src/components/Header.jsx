@@ -34,6 +34,20 @@ export default function Header() {
           >
             Papers
           </Link>
+           <Link
+              to="/missions"
+              className="text-gray-300 hover:text-blue-400 transition duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              Missions
+            </Link>
+             <Link
+              to="/experiments"
+              className="text-gray-300 hover:text-blue-400 transition duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              Biological Experiments
+            </Link>
         </nav>
 
         {/* 📱 Mobile Menu Button */}
@@ -62,6 +76,20 @@ export default function Header() {
               onClick={() => setIsOpen(false)}
             >
               Papers
+            </Link>
+             <Link
+              to="/missions"
+              className="text-gray-300 hover:text-blue-400 transition duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              Missions
+            </Link>
+             <Link
+              to="/experiments"
+              className="text-gray-300 hover:text-blue-400 transition duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              Biological Experiments
             </Link>
           </nav>
         </div>

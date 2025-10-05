@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import publications from "../data/publications.json";
 
 export default function Detail() {
   const { id } = useParams();
   const paper = publications[id];
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   if (!paper) {
     return (
@@ -20,6 +21,39 @@ export default function Detail() {
     );
   }
 
+  // 🎧 Text-to-Speech
+  const handleSpeak = () => {
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking) {
+      synth.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const textContent = `
+      ${paper.Title || ""}
+      ${paper.Authors ? "Authors: " + paper.Authors : ""}
+      ${paper.Journal ? "Journal: " + paper.Journal : ""}
+      ${paper.Abstract ? "Abstract: " + paper.Abstract : ""}
+      ${paper.Sections ? "Sections: " + paper.Sections : ""}
+      ${paper.Figures ? "Figures: " + paper.Figures : ""}
+      ${paper.Tables ? "Tables: " + paper.Tables : ""}
+      ${paper.summary ? "Summary: " + paper.summary : ""}
+    `;
+
+    const utterance = new SpeechSynthesisUtterance(textContent);
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    synth.cancel();
+    synth.speak(utterance);
+    setIsSpeaking(true);
+
+    utterance.onend = () => setIsSpeaking(false);
+  };
+
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <AnimatedBackground />
@@ -27,12 +61,27 @@ export default function Detail() {
       {/* --- Main content --- */}
       <div className="relative z-10 pt-28 pb-12 px-4 sm:px-6 md:px-10 flex flex-col items-center">
         <div className="w-full max-w-5xl bg-black border border-gray-800 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
-          {/* Title */}
+
+          {/* 🎧 Read Aloud Button */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={handleSpeak}
+              className={`text-xs sm:text-sm px-3 py-1.5 rounded-md font-semibold transition duration-300 ${
+                isSpeaking
+                  ? "bg-red-600 hover:bg-red-700"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
+              {isSpeaking ? "🛑 Stop" : "🔊 Read Aloud"}
+            </button>
+          </div>
+
+          {/* --- Paper Title --- */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-400 mb-6 text-center leading-snug">
             {paper.Title}
           </h1>
 
-          {/* Info section */}
+          {/* --- Info section --- */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-6 mb-8 text-sm sm:text-base text-center">
             {paper.Authors && (
               <p className="text-gray-300">
@@ -54,7 +103,7 @@ export default function Detail() {
             )}
           </div>
 
-          {/* Sections */}
+          {/* --- Sections --- */}
           <div className="space-y-8 text-gray-300 leading-relaxed">
             {paper.Abstract && <Section title="Abstract" content={paper.Abstract} />}
             {paper.Sections && <Section title="Sections" content={paper.Sections} />}
@@ -63,7 +112,7 @@ export default function Detail() {
             {paper.summary && <Section title="Summary" content={paper.summary} />}
           </div>
 
-          {/* Buttons */}
+          {/* --- Buttons --- */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
             <Link
               to="/papers"
@@ -76,7 +125,7 @@ export default function Detail() {
               to={`/summary/${id}`}
               className="w-full sm:w-auto text-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition-transform duration-300 hover:scale-105 shadow-lg shadow-indigo-900/40"
             >
-              🧠 View Summary
+              🧠 Generate Summary
             </Link>
           </div>
         </div>
@@ -85,9 +134,10 @@ export default function Detail() {
   );
 }
 
+/* --- Section Component --- */
 function Section({ title, content }) {
   return (
-    <section>
+    <section className="bg-gray-900/60 p-5 rounded-xl border border-gray-800 shadow-lg shadow-black/40">
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-blue-400 mb-3 border-b border-gray-800 pb-1">
         {title}
       </h2>
@@ -98,6 +148,7 @@ function Section({ title, content }) {
   );
 }
 
+/* --- Background Animation --- */
 function AnimatedBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden z-0">
@@ -114,17 +165,14 @@ function AnimatedBackground() {
           animation: moveStars 100s linear infinite;
           opacity: 0.15;
         }
-
         @keyframes moveStars {
           from { transform: translateY(0); }
           to { transform: translateY(-1000px); }
         }
-
         @keyframes pulse-slow {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.9; }
         }
-
         .animate-pulse-slow {
           animation: pulse-slow 6s ease-in-out infinite;
         }
@@ -132,6 +180,9 @@ function AnimatedBackground() {
     </div>
   );
 }
+
+
+
 
 
 

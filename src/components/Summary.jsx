@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import summarizedPublications from "../data/summarized_publications.json";
 
 export default function Summary() {
   const { id } = useParams();
   const summary = summarizedPublications[id];
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   if (!summary) {
     return (
@@ -22,6 +23,28 @@ export default function Summary() {
     );
   }
 
+  // 🎧 Text-to-speech function
+  const handleSpeak = () => {
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking) {
+      synth.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(summary.Summary);
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    synth.cancel();
+    synth.speak(utterance);
+    setIsSpeaking(true);
+
+    utterance.onend = () => setIsSpeaking(false);
+  };
+
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-gray-900 to-gray-950 text-white flex justify-center items-center px-4 py-16 overflow-hidden">
       {/* Dotted animation background */}
@@ -32,6 +55,21 @@ export default function Summary() {
 
       {/* Summary Card */}
       <div className="relative z-10 max-w-3xl w-full bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 border border-gray-700 shadow-2xl shadow-blue-900/30">
+
+        {/* 🎧 Read Aloud button */}
+        <div className="flex justify-end mb-3">
+          <button
+            onClick={handleSpeak}
+            className={`text-xs sm:text-sm px-3 py-1.5 rounded-md font-semibold transition duration-300 ${
+              isSpeaking
+                ? "bg-red-600 hover:bg-red-700"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {isSpeaking ? "🛑 Stop" : "🔊 Read Aloud"}
+          </button>
+        </div>
+
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-4 text-center drop-shadow-lg">
           📘 Research Summary
         </h1>
@@ -53,5 +91,6 @@ export default function Summary() {
     </div>
   );
 }
+
 
 
